@@ -78,8 +78,8 @@ router.post('/upload', (req, res, next) => {
             })
     })*/
     let fileName = internalName + "." + extension
-    fs.mkdirSync(path.join(__dirname, '../../files/', internalName))
-    fs.writeFile(path.join(__dirname, '../../files/', internalName, file.name), file.data, (err) => {
+    fs.mkdirSync(path.join(__dirname, '../../data/', internalName))
+    fs.writeFile(path.join(__dirname, '../../data/', internalName, file.name), file.data, (err) => {
         if (err)
             return res.json({
                 status: 4,
@@ -92,7 +92,7 @@ router.post('/upload', (req, res, next) => {
                 internalName: internalName,
                 fileName: fileName,
                 uploadedName: file.name,
-                url: `http://localhost:8080/files/${internalName}`,
+                url: `http://localhost:8080/data/${internalName}`,
                 size: file.size,
                 hash: file.md5
             }
