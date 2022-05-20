@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient()
+const path = require('path')
 
 router.get('/:file', (req, res) => {
     return prisma.file.findFirst({
@@ -18,6 +19,7 @@ router.get('/:file', (req, res) => {
             })
         res.sendFile(path.join(__dirname, '../../data/', internalName), data.uploadedName)
     }).catch(err => {
+        console.log(err)
         return res.json({
             status: 4,
             data: {
