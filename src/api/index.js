@@ -60,7 +60,7 @@ router.get('/status', (req, res) => {
 router.post('/upload', (req, res, next) => {
     if (!req.files.file)
         return res.json({
-            status: 2,
+            status: 1,
             data: {
                 message: "You must provide a file in order to upload it."
             }
