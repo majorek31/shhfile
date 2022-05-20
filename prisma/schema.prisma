@@ -13,4 +13,5 @@ model File {
   url String @unique
   createdAt DateTime @default(now())
   size Int
+  hash String
 }
