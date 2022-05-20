@@ -15,6 +15,35 @@ router.get('/info', (req, res) => {
                 message: "You must provide a file's id in order to retrive info about it."
             }
         })
+    return prisma.file.findFirst({
+        where: {
+            internalName: req.query.id
+        }
+    }).then(data => {
+        if (!data)
+            return res.json({
+                status: 3,
+                data: {
+                    message: "File not found."
+                }
+            })
+        return res.json({
+            status: 0, 
+            data: {
+                url: data.url,
+                size: data.size,
+                hash: data.hash,
+                createdAt: data.createdAt,
+            }
+        })
+    }).catch(err => {
+        return res.json({
+            status: 4,
+            data: {
+                message: "Internal server error"
+            }
+        })
+    })
 })
 
 //TODO: return data about size of stored file, number of them, etc
