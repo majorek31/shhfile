@@ -45,7 +45,7 @@ GET /api/info/:file
   data: {
     url: "http://localhost:8080/files/2c220011-19e4-48d8-9c6b-0150d9221c05",
     size: 3064, // size in BYTES of file
-    hash: b2b5f87eaef0a3f9f3fecd8ca529cbc2, // md5 file's hash
+    hash: "b2b5f87eaef0a3f9f3fecd8ca529cbc2", // md5 file's hash
     createdAt: "1653075199601", // time of file creation in ISO 8601 format
   }
 }
@@ -60,7 +60,7 @@ POST /api/upload
   data: {
     url: "http://localhost:8080/files/2c220011-19e4-48d8-9c6b-0150d9221c05",
     size: 3064, // size in BYTES of file
-    hash: b2b5f87eaef0a3f9f3fecd8ca529cbc2, // md5 file's hash
+    hash: "b2b5f87eaef0a3f9f3fecd8ca529cbc2", // md5 file's hash
     createdAt: "1653075199601", // time of file creation in ISO 8601 format
   }
 }
