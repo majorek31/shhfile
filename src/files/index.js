@@ -17,7 +17,7 @@ router.get('/:file', (req, res) => {
                     message: "File not found."
                 }
             })
-        res.sendFile(path.join(__dirname, '../../data/', internalName), data.uploadedName)
+        return res.sendFile(path.join(__dirname, '../../data/', data.internalName, data.uploadedName))
     }).catch(err => {
         console.log(err)
         return res.json({
