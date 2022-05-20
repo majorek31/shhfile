@@ -7,6 +7,7 @@ app.use(fileupload())
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.use('/api/', require('./api/index'))
+app.use('/files/', require('./files/index'))
 
 app.listen(8080, (err) => {
     if (err) throw err;
