@@ -46,9 +46,16 @@ router.get('/info', (req, res) => {
     })
 })
 
-//TODO: return data about size of stored file, number of them, etc
+//TODO: return data about size of stored files, number of them, etc
 router.get('/status', (req, res) => {
-
+    return prisma.file.count().then(data => {
+        return res.json({
+            status: 0,
+            data: {
+                storedFiles: data
+            }
+        })
+    })
 })
 
 router.post('/upload', (req, res, next) => {
