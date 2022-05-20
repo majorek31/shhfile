@@ -68,7 +68,7 @@ router.post('/upload', (req, res, next) => {
     let file = req.files.file
     let internalName = crypto.randomUUID()
     let extension = file.name.split('.').pop()
-    forbiddenExtensions.forEach(forbidden => {
+    /*forbiddenExtensions.forEach(forbidden => {
         if (extension === forbidden)
             return res.json({
                 status: 5,
@@ -76,7 +76,7 @@ router.post('/upload', (req, res, next) => {
                     message: "Forbidden extension."
                 }
             })
-    })
+    })*/
     let fileName = internalName + "." + extension
     fs.mkdirSync(path.join(__dirname, '../../files/', internalName))
     fs.writeFile(path.join(__dirname, '../../files/', internalName, file.name), file.data, (err) => {
