@@ -10,6 +10,8 @@ datasource db {
 model File {
   id Int @id @default(autoincrement())
   internalName String @unique
+  fileName String
+  uploadedName String
   url String @unique
   createdAt DateTime @default(now())
   size Int
