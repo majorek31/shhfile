@@ -92,7 +92,7 @@ router.post('/upload', (req, res, next) => {
                 internalName: internalName,
                 fileName: fileName,
                 uploadedName: file.name,
-                url: `http://localhost:8080/data/${internalName}`,
+                url: `http://localhost:8080/files/${internalName}`,
                 size: file.size,
                 hash: file.md5
             }
