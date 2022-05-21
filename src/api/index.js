@@ -31,15 +31,18 @@ router.get('/info', async (req, res) => {
     }
 })
 
-router.get('/status', (req, res) => {
-    return prisma.file.count().then(data => {
+router.get('/status', async (req, res) => {
+    try {
+        fileCount = await prisma.file.count()
         return res.json({
-            status: 0,
             data: {
-                storedFiles: data
+                storedFiles: fileCount
             }
         })
-    })
+    } catch (err) {
+        console.error(err)
+        return res.sendStatus(500)
+    }
 })
 
 router.post('/upload', (req, res, next) => {
