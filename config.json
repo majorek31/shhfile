@@ -6,6 +6,7 @@
         "domain": "localhost"
     },
     "routing": {
-        "enabled": true
+        "enabled": true,
+        "index": "index.html"
     }
 }
