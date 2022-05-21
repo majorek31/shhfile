@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const bodyparser = require('body-parser');
 const fileupload = require('express-fileupload')
 const app = express();
 const fs = require('fs');
@@ -14,7 +14,7 @@ try {
 }
 
 app.use(fileupload())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyparser.urlencoded({extended: true}))
 
 app.use('/api/', require('./api/index'))
 app.use('/files/', require('./files/index'))
