@@ -5,6 +5,7 @@ const fs = require('fs')
 const crypto = require('crypto')
 const path = require('path')
 const prisma = new PrismaClient()
+const config = require('../../config.json')
 
 router.get('/info', async (req, res) => {
     if (!req.query.id)
@@ -49,6 +50,10 @@ router.post('/upload', async (req, res) => {
     if (!req.files.file)
         return res.sendStatus(400)
     file = req.files.file
+    if (config.maxFileSize) {
+        if (file.size > config.maxFileSize)
+            return res.sendStatus(413)
+    }
     internalName = crypto.randomUUID()
     extension = file.name.split('.').pop()
     fileName = internalName + "." + extension
