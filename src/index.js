@@ -22,5 +22,5 @@ app.use('/files/', require('./files/index'))
 
 app.listen(config.port, (err) => {
     if (err) throw err;
-    console.log("server's alive")
+    console.log(`Server started listening on port: ${config.port}`)
 });
