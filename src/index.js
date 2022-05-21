@@ -4,6 +4,7 @@ const fileupload = require('express-fileupload')
 const app = express();
 const fs = require('fs');
 const path = require('path');
+const config = require('../config.json');
 
 try {
     fs.mkdirSync(path.join(__dirname, '../data'))
@@ -19,7 +20,7 @@ app.use(bodyparser.urlencoded({extended: true}))
 app.use('/api/', require('./api/index'))
 app.use('/files/', require('./files/index'))
 
-app.listen(8080, (err) => {
+app.listen(config.port, (err) => {
     if (err) throw err;
     console.log("server's alive")
 });
