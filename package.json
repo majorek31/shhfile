@@ -1,6 +1,6 @@
 {
   "name": "shhfile",
-  "version": "0.0.1-DEV",
+  "version": "1.0.4",
   "description": "File sharing service",
   "main": "index.js",
   "scripts": {

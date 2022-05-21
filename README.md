@@ -1,35 +1,32 @@
-# shhfile service
+# ShhFile
 
-### shhfile is a service that provides fast and free file sharing.
-I've made this just for my own pleasure and skills improvement
+ShhFile is a service that provides fast and free file sharing.
+that i've made this just for my own pleasure and skills improvement
 
-### Techstack
+## Techstack
 To create this i used: Express, NodeJS, Prisma, SQLite stack
 
-## setup
-in order to set-up the server run those 3 commands
+## Installation
+In order to set-up the server run those 3 commands
 ```
 npm i
 npx prisma db push
 npm start
 ```
-# API
+# API Docs
 
-### Response codes
-```
-0 - OK
-1 - Invalid params
-3 - File not found
-4 - Internal server error
-```
-For every status code diffrent than 0 ```data.message``` is specified
 ### Get server's status
 
-#### Request
+Returns information about number of stored files.
+
+##### Request
+
 ```js
 GET /api/status
+```
+##### Example response
+```js
 {
-  status: 0,
   data: {
     storedFiles: 1 // number of stored files
   }
@@ -40,8 +37,10 @@ GET /api/status
 #### Request
 ```js
 GET /api/info/:file
+```
+##### Example response
+```js
 {
-  status: 0, // or 1, 3, 4
   data: {
     url: "http://localhost:8080/files/2c220011-19e4-48d8-9c6b-0150d9221c05",
     size: 3064, // size in BYTES of file
@@ -55,9 +54,16 @@ GET /api/info/:file
 #### Request
 ```js
 POST /api/upload
+```
+##### Example request
+```bash
+curl -F "file=@important-file.txt" http://localhost:8080/api/upload
+```
+##### Example response
+```js
 {
-  status: 0, // or 1, 4
   data: {
+    id: 2c220011-19e4-48d8-9c6b-0150d9221c05, // id that is used in /api/info
     url: "http://localhost:8080/files/2c220011-19e4-48d8-9c6b-0150d9221c05",
     size: 3064, // size in BYTES of file
     hash: "b2b5f87eaef0a3f9f3fecd8ca529cbc2", // md5 file's hash
