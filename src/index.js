@@ -5,7 +5,13 @@ const app = express();
 const fs = require('fs');
 const path = require('path');
 
-fs.mkdirSync(path.join(__dirname, '../data'))
+try {
+    fs.mkdirSync(path.join(__dirname, '../data'))
+} catch (err) {
+    if (err)
+        if (!err.code === "EEXIST")
+            throw err
+}
 
 app.use(fileupload())
 app.use(bodyParser.urlencoded({extended: true}))
