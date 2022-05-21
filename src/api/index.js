@@ -5,7 +5,6 @@ const fs = require('fs')
 const crypto = require('crypto')
 const path = require('path')
 const prisma = new PrismaClient()
-const {forbiddenExtensions} = require('../../config.json')
 
 router.get('/info', (req, res) => {
     if (!req.query.id)
