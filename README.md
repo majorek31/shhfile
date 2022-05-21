@@ -21,11 +21,11 @@ Returns information about number of stored files.
 
 ##### Request
 
-```json
+```js
 GET /api/status
 ```
 ##### Example response
-```
+```js
 {
   data: {
     storedFiles: 1 // number of stored files
@@ -35,11 +35,11 @@ GET /api/status
 ### Get file's information
 
 #### Request
-```json
+```js
 GET /api/info/:file
 ```
 ##### Example response
-```
+```js
 {
   data: {
     url: "http://localhost:8080/files/2c220011-19e4-48d8-9c6b-0150d9221c05",
@@ -60,7 +60,7 @@ POST /api/upload
 curl -F "file=@important-file.txt" http://localhost:8080/api/upload
 ```
 ##### Example response
-```
+```js
 {
   data: {
     id: 2c220011-19e4-48d8-9c6b-0150d9221c05, // id that is used in /api/info
