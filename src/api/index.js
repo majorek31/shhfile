@@ -45,28 +45,17 @@ router.get('/status', async (req, res) => {
     }
 })
 
-router.post('/upload', (req, res, next) => {
+router.post('/upload', async (req, res) => {
     if (!req.files.file)
-        return res.json({
-            status: 1,
-            data: {
-                message: "You must provide a file in order to upload it."
-            }
-        })
+        return res.sendStatus(400)
     file = req.files.file
     internalName = crypto.randomUUID()
     extension = file.name.split('.').pop()
     fileName = internalName + "." + extension
-    fs.mkdirSync(path.join(__dirname, '../../data/', internalName))
-    fs.writeFile(path.join(__dirname, '../../data/', internalName, file.name), file.data, (err) => {
-        if (err)
-            return res.json({
-                status: 4,
-                data: {
-                    message: "Internal server error"
-                }
-            })
-        prisma.file.create({
+    try {
+        fs.mkdirSync(path.join(__dirname, '../../data/', internalName))
+        fs.writeFileSync(path.join(__dirname, '../../data/', internalName, file.name), file.data)
+        createdFile = await prisma.file.create({
             data: {
                 internalName: internalName,
                 fileName: fileName,
@@ -75,26 +64,21 @@ router.post('/upload', (req, res, next) => {
                 size: file.size,
                 hash: file.md5
             }
-        }).then((data) => {
-            res.json({
-                status: 0, 
-                data: {
-                    url: data.url,
-                    size: data.size,
-                    hash: data.hash,
-                    createdAt: data.createdAt,
-                }
-            })
-        }).catch((err) => {
-            if (err) throw err
-            return res.json({
-                status: 4,
-                data: {
-                    message: "Internal server error"
-                }
-            })
         })
-    })
+        return res.json({
+            status: 0, 
+            data: {
+                id: createdFile.internalName,
+                url: createdFile.url,
+                size: createdFile.size,
+                hash: createdFile.hash,
+                createdAt: createdFile.createdAt,
+            }
+        })
+    } catch (err) {
+        console.error(err)
+        return res.sendStatus(500)
+    }
 })
 
 module.exports = router
