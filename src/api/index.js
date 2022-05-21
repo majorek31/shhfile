@@ -66,7 +66,6 @@ router.post('/upload', async (req, res) => {
             }
         })
         return res.json({
-            status: 0, 
             data: {
                 id: createdFile.internalName,
                 url: createdFile.url,
