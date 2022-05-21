@@ -4,5 +4,8 @@
     "link": {
         "protocol": "http",
         "domain": "localhost"
+    },
+    "routing": {
+        "enabled": true
     }
 }
