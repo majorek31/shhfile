@@ -6,43 +6,29 @@ const crypto = require('crypto')
 const path = require('path')
 const prisma = new PrismaClient()
 
-router.get('/info', (req, res) => {
+router.get('/info', async (req, res) => {
     if (!req.query.id)
-        return res.json({
-            status: 1,
-            data: {
-                message: "You must provide a file's id in order to retrive info about it."
+        return res.sendStatus(400)
+    try {
+        file = await prisma.file.findFirst({
+            where: {
+                internalName: req.query.id
             }
         })
-    return prisma.file.findFirst({
-        where: {
-            internalName: req.query.id
-        }
-    }).then(data => {
-        if (!data)
-            return res.json({
-                status: 3,
-                data: {
-                    message: "File not found."
-                }
-            })
+        if (!file) 
+            return res.sendStatus(404)
         return res.json({
-            status: 0, 
             data: {
-                url: data.url,
-                size: data.size,
-                hash: data.hash,
-                createdAt: data.createdAt,
+                url: file.url,
+                size: file.size,
+                hash: file.hash,
+                createdAt: file.createdAt,
             }
-        })
-    }).catch(err => {
-        return res.json({
-            status: 4,
-            data: {
-                message: "Internal server error"
-            }
-        })
-    })
+        })    
+    } catch (err) {
+        console.error(err)
+        return res.sendStatus(500)
+    }
 })
 
 router.get('/status', (req, res) => {
