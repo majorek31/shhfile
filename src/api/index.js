@@ -64,10 +64,10 @@ router.post('/upload', (req, res, next) => {
                 message: "You must provide a file in order to upload it."
             }
         })
-    let file = req.files.file
-    let internalName = crypto.randomUUID()
-    let extension = file.name.split('.').pop()
-    let fileName = internalName + "." + extension
+    file = req.files.file
+    internalName = crypto.randomUUID()
+    extension = file.name.split('.').pop()
+    fileName = internalName + "." + extension
     fs.mkdirSync(path.join(__dirname, '../../data/', internalName))
     fs.writeFile(path.join(__dirname, '../../data/', internalName, file.name), file.data, (err) => {
         if (err)
